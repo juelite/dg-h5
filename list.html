@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+		<meta charset="utf-8" />
+		<title>My List</title>
+		<meta name="description" content="Static &amp; Dynamic Tables" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+
+		<!-- bootstrap & fontawesome -->
+		<link rel="stylesheet" href="assets/css/bootstrap.min.css" />
+		<link rel="stylesheet" href="assets/font-awesome/4.5.0/css/font-awesome.min.css" />
+
+		<!-- ace styles -->
+		<link rel="stylesheet" href="assets/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
+
+		<!--[if lte IE 9]>
+			<link rel="stylesheet" href="assets/css/ace-part2.min.css" class="ace-main-stylesheet" />
+		<![endif]-->
+		<!--[if lte IE 8]>
+		<script src="assets/js/html5shiv.min.js"></script>
+		<script src="assets/js/respond.min.js"></script>
+		<![endif]-->
+	</head>
+    <style>
+        .modal-dialog {
+            margin: 200px auto !important;
+            width: 80% !important;
+        }
+    </style>
+
+	<body class="no-skin">
+		<div id="navbar" class="navbar navbar-default ace-save-state">
+            <div class="btn-group pull-right">
+                <button data-toggle="dropdown" class="btn btn-primary btn-white dropdown-toggle" aria-expanded="false">
+                    <i class="ace-icon fa fa-cog icon-on-right"></i>
+                </button>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="javascript:void(0);" id="logout">退出登录</a>
+                    </li>
+                </ul>
+            </div>
+		</div>
+
+		<div class="main-container ace-save-state" id="main-container">
+			<script type="text/javascript">
+				try{ace.settings.loadState('main-container')}catch(e){}
+			</script>
+			<div class="main-content">
+				<div class="main-content-inner">
+                    <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                        <thead>
+                        <tr>
+                            <th>名称</th>
+                            <th>数量</th>
+                            <th>
+                                <i class="ace-icon fa fa-clock-o bigger-110 hidden-480"></i>
+                                操作
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr>
+                            <td>
+                                <a href="#">app.com</a>
+                            </td>
+                            <td>45</td>
+                            <td>
+                                <div>
+                                    <a class="blue" href="#">
+                                        <i class="ace-icon glyphicon glyphicon-plus bigger-130"></i>
+                                    </a>
+
+                                    <a class="green" href="#">
+                                        <i class="ace-icon glyphicon glyphicon-minus bigger-130"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+				</div>
+			</div><!-- /.main-content -->
+		</div><!-- /.main-container -->
+        <div class="modal fade" id="myModal" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" data-backdrop="static">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-body">
+                        请先<a href="index.html">登录</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+	</body>
+    <!--[if !IE]> -->
+    <script src="assets/js/jquery-2.1.4.min.js"></script>
+
+    <!-- <![endif]-->
+
+    <!--[if IE]>
+    <script src="assets/js/jquery-1.11.3.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript">
+        if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script type="application/javascript" src="//apps.bdimg.com/libs/jquery.cookie/1.4.1/jquery.cookie.js"></script>
+
+    <script type="application/javascript">
+
+        jQuery(function($) {
+            var token = $.cookie('userToken');
+            if (!token || token === "null" || token.length < 1) {
+                $("#myModal").modal({backdrop: "static", keyboard: false});
+            }
+            $("#logout").click(function () {
+                $.cookie('userToken', null);
+                window.location.href = "index.html"
+            });
+            // $.post(app_url + "/login", data, function (o) {
+            //     if (o.code === 0) {
+            //         $("#result").html("登录成功！").show();
+            //         console.log(o.data.token);
+            //         $.cookie('userToken', o.data.token);
+            //         window.location.href = "list.html"
+            //     } else {
+            //         $("#result").html(o.message).fadeIn(0).fadeOut(5000)
+            //     }
+            // });
+        })
+    </script>
+</html>
